@@ -18,7 +18,7 @@ namespace Program.Main
             engine.clear_console();
             engine.slow_type("\n\n-Welcome to the world of Cyber Blight-\n", 100);
             Thread.Sleep(1000);
-            string profile = engine.drop_down("Select your file",DataIO.existing_files(@"save_data\saves"));
+            string profile = engine.drop_down_string("Select your file",DataIO.existing_files(@"save_data\saves"));
         }
             data_IO.save(player, player_name);
             engine.clear_console();

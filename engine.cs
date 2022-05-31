@@ -8,25 +8,17 @@ namespace CyberBlight.engine
 
     public class Logic 
     {
-        public string focus { get; set; }
-        public Logic()
-        {
-            this.focus =  "console_main_menu";
-        }
+            public static string focus = "console_main_menu";
+
 
     }
     
     
-    public static class engine
+    public class engine
     {
-        public static object game = new Logic();
-
-
-
         // these functions should be used throughout the project to automate
         // repetetive or complex tasks.
         // this is the 'engine' of our game.
-
 
 
         public static void slow_type(string text, int typing_speed = 50, bool new_line = true)
@@ -135,6 +127,89 @@ namespace CyberBlight.engine
             }
         }
 
+        public static string drop_down_string(string prompt,Dictionary<string,string> items, string input_prompt = ">")
+        {
+
+            /* makes a drop down menu from a dict of choices
+
+             returns: a value from the dict passed into it,
+             there is no way to exit this menu loop without a valid selection.
+
+             if you want to add an exit clause, than make an exit value 
+             in your dict to be returned and then handle that return value
+             from your calling code.
+
+             example:
+
+             selection=drop_down(prompt,items={},input_prompt='>')
+             if selection == exit_value:
+                 break
+
+             input_prompt defaults to a single '>'
+             it is recommended to modify this to show how many menus
+             deep a player is.
+
+             if the input is not recognized too many times the menu 
+             prompt will be re-printed to prevent the player from having to
+             scroll up to read the available options.
+
+             input will be valid if a key from the dict is typed out in upper
+             or lowercase, or if the index of the menu item is input
+            */
+
+            object item;
+            int index;
+            Console.WriteLine(prompt + ":");
+            foreach (var _tup_1 in items.Select((_p_1,_p_2) => Tuple.Create(_p_2, _p_1)))
+            {
+                index = _tup_1.Item1;
+                item = _tup_1.Item2;
+                Console.WriteLine($"[{index+1}] {item}");
+            }
+            int typo = 0;
+            while (true)
+            {
+                if (typo == 4)
+                {
+                    typo = 0;
+                    Console.WriteLine("\n" + prompt + ":");
+                    foreach (var _tup_2 in items.Select((_p_3,_p_4) => Tuple.Create(_p_4, _p_3)))
+                    {
+                        index = _tup_2.Item1;
+                        item = _tup_2.Item2;
+                        Console.WriteLine($"[{index+1}] {item}");
+                    }
+                }
+                Console.Write(input_prompt);
+                var input = Console.ReadLine();
+                try
+                {
+                    int selection = Convert.ToInt32(input) - 1;
+                    foreach (var _tup_3 in items.Select((_p_5,_p_6) => Tuple.Create(_p_6, _p_5)))
+                    {
+                        index = _tup_3.Item1;
+                        item = _tup_3.Item2;
+                        if (index == selection)
+                        {
+                            return items[Convert.ToString(selection)];
+                        }
+                    }
+                }
+                catch (ArgumentException)
+                {
+                    if(input!=null)
+                    {
+                        string selection = char.ToUpper(input[0]) + input.Substring(1);
+                        if (items.ContainsKey(selection))
+                        {
+                            return items[selection];
+                        }
+                    }
+                }
+                Console.WriteLine("\nThat is not on the list.\nVerify your selection.");
+                typo += 1;
+            }
+        }
         public static void clear_console()
         {
         // removes all text from the console preventing scrolling up
