@@ -8,7 +8,7 @@ namespace CyberBlight.console
     {
 
         public Terminal(){}
-        public void main_menu()
+        public static void main_menu()
         {
             string action = engine.drop_down_string("Console", new Dictionary<string, string>
             {
@@ -27,7 +27,7 @@ namespace CyberBlight.console
             Logic.focus=action;
         }
         
-        public void terminal()
+        public static void terminal()
         {
             string action = engine.drop_down_string("Terminal", new Dictionary<string, string>
             {
@@ -46,11 +46,11 @@ namespace CyberBlight.console
             Logic.focus = action;
         }
         
-        public void network()
+        public static void network()
         {
         }
         
-        public void email()
+        public static void email()
         {
             engine.clear_console();
             string action = engine.drop_down_string("E-mail", new Dictionary<string, string>
@@ -64,11 +64,11 @@ namespace CyberBlight.console
             Logic.focus = action;
         }
         
-        public void inbox()
+        public static void inbox()
         {
         }
         
-        public void settings()
+        public static void settings()
         {
         }
     }

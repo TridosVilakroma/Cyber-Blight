@@ -9,8 +9,6 @@ namespace CyberBlight.engine
     public class Logic 
     {
             public static string focus = "console_main_menu";
-
-
     }
     
     
