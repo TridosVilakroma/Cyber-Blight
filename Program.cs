@@ -9,7 +9,7 @@ namespace Program.Main
     using CyberBlight.text;
     using CyberBlight.character_sheet;
     // using inventory;
-    // using logic_dispatch;
+    using CyberBlight.logic_dispatch;
 
     public static class GameStruct
     {
@@ -57,8 +57,8 @@ namespace Program.Main
 
         public static void GameLoop()
         {
-            logic_dispatch.focus_switch();
-            logic_dispatch.aux_state();
+            StateMachine.focus_switch();
+            StateMachine.aux_state();
         }
     }
 }

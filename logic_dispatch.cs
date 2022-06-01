@@ -6,7 +6,7 @@ namespace CyberBlight.logic_dispatch
     //using inventory;
     using engine;
 
-    public static class focusSwitch
+    public static class StateMachine
     {
         public static void focus_switch()
         {
