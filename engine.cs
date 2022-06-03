@@ -1,3 +1,4 @@
+using System;
 namespace CyberBlight.engine 
 {
 
@@ -19,7 +20,7 @@ namespace CyberBlight.engine
         // this is the 'engine' of our game.
 
 
-        public static void slow_type(string text, int typing_speed = 50, bool new_line = true)
+        public static void slow_type(string text, int typing_speed = 100, bool new_line = true)
         {
         // print function that feels like a human is typing.
         //
@@ -27,13 +28,16 @@ namespace CyberBlight.engine
         //
         //new_line is a boolean, it controls weather the console will begin 
         //the next print operation on the same line or a new line.
+            Random rng = new Random();
             foreach (var letter in text)
             {
             //this looks at each letter and prints it, then waits a random amount of time.
                 Console.Write(letter);
                 //sys.stdout.flush();
-                Random rng = new Random();
-                Thread.Sleep(Convert.ToInt32(rng.NextDouble() * 12500.0 / typing_speed));
+ main
+                
+                Thread.Sleep(rng.Next(0, typing_speed));
+
             }
             if (new_line)
             {
