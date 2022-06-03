@@ -175,7 +175,7 @@ namespace CyberBlight.engine
                     {
                         if (index == selection)
                         {
-                            return items[Convert.ToString(item)];
+                            return items[item];
                         }
                     }
                 }
