@@ -17,7 +17,9 @@ namespace CyberBlight.data_IO
 
         public static Dictionary<string,string> existing_files(string folderPath)
         {
-            Dictionary<string,string> filePaths = Directory.GetFiles(folderPath).ToDictionary(file=>file,name=>name);
+            Dictionary<string,string> filePaths = Directory.GetFiles(folderPath).
+                                                  Select(file => Path.GetFileName(file)).
+                                                  ToArray().ToDictionary(file=>file,name=>name);
             filePaths["New Game"]="New Game";
             return filePaths;
         }
