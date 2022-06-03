@@ -16,16 +16,19 @@ namespace Program.Main
         public static void Main()
         {
             engine.clear_console();
-            engine.slow_type("\n\n-Welcome to the world of Cyber Blight-\n", 100);
+            engine.slow_type("\n\n-Welcome to the world of Cyber Blight-", 75, false);
             Thread.Sleep(1000);
-            string profile = engine.drop_down_string("Select your file",DataIO.existing_files(@"save_data\saves"));
+            Console.WriteLine();
+            Console.WriteLine();
+            string profile = engine.drop_down("Select your file",DataIO.existing_files(@"save_data\saves"));
             if (profile == "New Game")
             {
                 NewGame();
             }
             else
             {
-                //var save_data = DataIO.load(profile);
+                //var save_data = DataIO.load(profile); this should return the data, then a seperate
+                //function should initialize the game with that data
                 ContinueGame();
             }
             GameLoop();

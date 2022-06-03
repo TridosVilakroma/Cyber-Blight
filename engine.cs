@@ -34,8 +34,10 @@ namespace CyberBlight.engine
             //this looks at each letter and prints it, then waits a random amount of time.
                 Console.Write(letter);
                 //sys.stdout.flush();
+ main
                 
                 Thread.Sleep(rng.Next(0, typing_speed));
+
             }
             if (new_line)
             {
@@ -43,7 +45,7 @@ namespace CyberBlight.engine
             }
         }
 
-        public static object drop_down(string prompt,Dictionary<string,string> items, string input_prompt = ">")
+        public static object drop_down_object(string prompt,Dictionary<string,object> items, string input_prompt = ">")
         {
 
             /* makes a drop down menu from a dict of choices
@@ -73,45 +75,38 @@ namespace CyberBlight.engine
              or lowercase, or if the index of the menu item is input
             */
 
-            object item;
-            int index;
-            Console.WriteLine(prompt + ":");
-            foreach (var _tup_1 in items.Select((_p_1,_p_2) => Tuple.Create(_p_2, _p_1)))
+            void draw()
             {
-                index = _tup_1.Item1;
-                item = _tup_1.Item2;
-                Console.WriteLine($"[{index+1}] {item}");
+                Console.WriteLine();
+                Console.WriteLine(prompt + ":");
+                foreach (var (item, index) in items.Keys.ToArray().Select((item, index) => ( item, index )))
+                {
+                    Console.WriteLine($"[{index+1}] {item}");
+                }
             }
+            draw();
             int typo = 0;
             while (true)
             {
                 if (typo == 4)
                 {
                     typo = 0;
-                    Console.WriteLine("\n" + prompt + ":");
-                    foreach (var _tup_2 in items.Select((_p_3,_p_4) => Tuple.Create(_p_4, _p_3)))
-                    {
-                        index = _tup_2.Item1;
-                        item = _tup_2.Item2;
-                        Console.WriteLine($"[{index+1}] {item}");
-                    }
+                    draw();
                 }
                 Console.Write(input_prompt);
                 var input = Console.ReadLine();
                 try
                 {
                     int selection = Convert.ToInt32(input) - 1;
-                    foreach (var _tup_3 in items.Select((_p_5,_p_6) => Tuple.Create(_p_6, _p_5)))
+                    foreach (var (item, index) in items.Keys.ToArray().Select((item, index) => ( item, index )))
                     {
-                        index = _tup_3.Item1;
-                        item = _tup_3.Item2;
                         if (index == selection)
                         {
-                            return items[Convert.ToString(selection)];
+                            return items[Convert.ToString(item)];
                         }
                     }
                 }
-                catch (ArgumentException)
+                catch (FormatException)
                 {
                     if(input!=null)
                     {
@@ -127,7 +122,7 @@ namespace CyberBlight.engine
             }
         }
 
-        public static string drop_down_string(string prompt,Dictionary<string,string> items, string input_prompt = ">")
+        public static string drop_down(string prompt,Dictionary<string,string> items, string input_prompt = ">")
         {
 
             /* makes a drop down menu from a dict of choices
@@ -157,45 +152,38 @@ namespace CyberBlight.engine
              or lowercase, or if the index of the menu item is input
             */
 
-            object item;
-            int index;
-            Console.WriteLine(prompt + ":");
-            foreach (var _tup_1 in items.Select((_p_1,_p_2) => Tuple.Create(_p_2, _p_1)))
+            void draw()
             {
-                index = _tup_1.Item1;
-                item = _tup_1.Item2;
-                Console.WriteLine($"[{index+1}] {item}");
+                Console.WriteLine();
+                Console.WriteLine(prompt + ":");
+                foreach (var (item, index) in items.Keys.ToArray().Select((item, index) => ( item, index )))
+                {
+                    Console.WriteLine($"[{index+1}] {item}");
+                }
             }
+            draw();
             int typo = 0;
             while (true)
             {
                 if (typo == 4)
                 {
                     typo = 0;
-                    Console.WriteLine("\n" + prompt + ":");
-                    foreach (var _tup_2 in items.Select((_p_3,_p_4) => Tuple.Create(_p_4, _p_3)))
-                    {
-                        index = _tup_2.Item1;
-                        item = _tup_2.Item2;
-                        Console.WriteLine($"[{index+1}] {item}");
-                    }
+                    draw();
                 }
                 Console.Write(input_prompt);
                 var input = Console.ReadLine();
                 try
                 {
                     int selection = Convert.ToInt32(input) - 1;
-                    foreach (var _tup_3 in items.Select((_p_5,_p_6) => Tuple.Create(_p_6, _p_5)))
+                    foreach (var (item, index) in items.Keys.ToArray().Select((item, index) => ( item, index )))
                     {
-                        index = _tup_3.Item1;
-                        item = _tup_3.Item2;
                         if (index == selection)
                         {
-                            return items[Convert.ToString(selection)];
+                            return items[Convert.ToString(item)];
                         }
                     }
                 }
-                catch (ArgumentException)
+                catch (FormatException)
                 {
                     if(input!=null)
                     {

@@ -17,17 +17,11 @@ namespace CyberBlight.data_IO
 
         public static Dictionary<string,string> existing_files(string folderPath)
         {
-            string[] filePaths = Directory.GetFiles(@$"{folderPath}");
-            var saves_dict = new Dictionary<string, string>();
-            foreach(var save in filePaths)
-            {
-                Console.WriteLine(save);
-            }
-
-
-            // saves_dict={i: i for i in listdir(folder)}
-            // saves_dict['New Game']= len(saves_dict)+1
-            return saves_dict;
+            Dictionary<string,string> filePaths = Directory.GetFiles(folderPath).
+                                                  Select(file => Path.GetFileName(file)).
+                                                  ToArray().ToDictionary(file=>file,name=>name);
+            filePaths["New Game"]="New Game";
+            return filePaths;
         }
     }
 }
