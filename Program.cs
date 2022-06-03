@@ -19,7 +19,6 @@ namespace Program.Main
             engine.slow_type("\n\n-Welcome to the world of Cyber Blight-\n", 100);
             Thread.Sleep(1000);
             string profile = engine.drop_down_string("Select your file",DataIO.existing_files(@"save_data\saves"));
-            NewGame();
             if (profile == "New Game")
             {
                 NewGame();
