@@ -34,7 +34,6 @@ namespace CyberBlight.engine
             //this looks at each letter and prints it, then waits a random amount of time.
                 Console.Write(letter);
                 //sys.stdout.flush();
- main
                 
                 Thread.Sleep(rng.Next(0, typing_speed));
 
