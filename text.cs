@@ -30,6 +30,7 @@ namespace CyberBlight.text
             engine.slow_type(".", new_line: false);
             Thread.Sleep(500);
             engine.slow_type(".", new_line: false);
+            Console.CursorVisible = true;
         }
     }
 }

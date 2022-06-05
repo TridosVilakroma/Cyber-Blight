@@ -43,7 +43,6 @@ namespace CyberBlight.engine
                 Console.WriteLine("");
             }
         }
-
         public static object drop_down_object(string prompt,Dictionary<string,object> items, string input_prompt = ">")
         {
 
@@ -120,7 +119,6 @@ namespace CyberBlight.engine
                 typo += 1;
             }
         }
-
         public static string drop_down(string prompt,Dictionary<string,string> items, string input_prompt = ">")
         {
 
@@ -178,7 +176,7 @@ namespace CyberBlight.engine
                     {
                         if (index == selection)
                         {
-                            return items[Convert.ToString(item)];
+                            return items[item];
                         }
                     }
                 }
@@ -203,7 +201,6 @@ namespace CyberBlight.engine
             Console.Clear();
             Console.WriteLine("\n\n");
         }
-
         public static void jump(int amount = 1)
         {
         /* prints new lines
@@ -215,6 +212,93 @@ namespace CyberBlight.engine
             {
                 Console.WriteLine("\n");
             }
+        }
+        public static string carrot_menu(string prompt,Dictionary<string,string> items, string input_prompt = ">")
+        {
+            jump();
+            Console.CursorVisible = false;
+            int carrot = 0;
+            int fps = 60;
+            Console.WriteLine(prompt + ":");
+            int cursorResetLeft  = Console.CursorLeft;
+            int cursorResetTop  = Console.CursorTop;
+            void draw()
+            {
+                Console.SetCursorPosition(cursorResetLeft,cursorResetTop);
+                foreach (var (item, index) in items.Keys.ToArray().Select((item, index) => ( item, index )))
+                {
+                    for (int i = 0; i < items.Count+10; i++)
+                    {
+                        Console.Write(" ");
+                    }
+                    Console.SetCursorPosition(cursorResetLeft,Console.CursorTop);
+                    if (carrot==index)
+                    {
+                        Console.WriteLine($">[{index+1}] {item}");
+                    }
+                    else
+                    {
+                    Console.WriteLine($"[{index+1}] {item}");
+                    }
+                }
+            }
+            string getItem()
+            {
+                if (Console.KeyAvailable)
+                { var key = Console.ReadKey(true);
+                    switch (key.Key)
+                    {
+                        case ConsoleKey.UpArrow:
+                            if (carrot>0)
+                            {
+                                carrot-=1;
+                                draw();
+                            }
+                            return "nada";
+                        case ConsoleKey.DownArrow:
+                            if (carrot<items.Count-1)
+                            {
+                                carrot+=1;
+                                draw();
+                            }
+                            return "nada";
+                        case ConsoleKey.Enter:
+                            foreach (var (item, index) in items.Keys.ToArray().Select((item, index) => ( item, index )))
+                            {
+                                if (carrot==index)
+                                {
+                                    return item;
+                                }
+                            }
+                            return "nada";
+                    }
+                }
+                return "nada";
+            }
+            DateTime time1 = DateTime.Now;
+            DateTime time2 = DateTime.Now;
+            void deltaTime()
+            {
+                time2 = DateTime.Now;
+                float deltaTime = (time2.Ticks - time1.Ticks)/10000;//Ticks are 1/10,000 of a millisecond
+                if (deltaTime<fps && deltaTime>0)
+                {
+                    Thread.Sleep((Convert.ToInt32(fps-deltaTime)));
+                }
+                time1 = time2;
+            }
+            draw();
+            while(true)
+            {
+                deltaTime();
+                string selection = getItem();
+                if (selection!="nada")
+                {
+                    Console.CursorVisible = true;
+                    return selection;
+                }
+            }
+
         }
     }
 

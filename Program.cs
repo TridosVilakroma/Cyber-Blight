@@ -5,7 +5,7 @@ namespace Program.Main
 
     using CyberBlight.engine;
     using CyberBlight.data_IO;
-    using CyberBlight.console;
+    //using CyberBlight.console;
     using CyberBlight.text;
     using CyberBlight.character_sheet;
     // using inventory;
@@ -21,7 +21,7 @@ namespace Program.Main
             Thread.Sleep(1000);
             Console.WriteLine();
             Console.WriteLine();
-            string profile = engine.drop_down("Select your file",DataIO.existing_files(@"save_data\saves"));
+            string profile = engine.carrot_menu("Select your file",DataIO.existing_files(@"save_data\saves"));
             if (profile == "New Game")
             {
                 NewGame();
@@ -37,7 +37,7 @@ namespace Program.Main
 
         public static void NewGame()
         {
-            Console.WriteLine("    Enter your name:\n    >>");
+            Console.Write("    Enter your name:\n    >>");
             var player_name = Console.ReadLine();
             if (player_name!=null)
             {
