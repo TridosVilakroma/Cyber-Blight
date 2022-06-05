@@ -7,6 +7,7 @@ namespace CyberBlight.text
 
         public static void prologue()
         {
+            Console.CursorVisible = false;
             engine.slow_type("The world has grown in population and technology.\n", 100);
             Thread.Sleep(1000);
             engine.slow_type(@"Computers created advanced algorithms that grew 
@@ -30,6 +31,7 @@ namespace CyberBlight.text
             engine.slow_type(".", new_line: false);
             Thread.Sleep(500);
             engine.slow_type(".", new_line: false);
+            Console.CursorVisible = true;
         }
     }
 }
