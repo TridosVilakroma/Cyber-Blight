@@ -215,7 +215,7 @@ namespace CyberBlight.engine
         }
         public static string carrot_menu(string prompt,Dictionary<string,string> items, string input_prompt = ">")
         {
-            jump(4);
+            jump();
             Console.CursorVisible = false;
             int carrot = 0;
             int fps = 60;
