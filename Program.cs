@@ -16,6 +16,7 @@ namespace Program.Main
         public static void Main()
         {
             engine.clear_console();
+            effects.glitch(150, ConsoleColor.Black, ConsoleColor.DarkGreen);
             engine.slow_type("\n\n-Welcome to the world of Cyber Blight-", 75, false);
             Thread.Sleep(1000);
             Console.WriteLine();

@@ -217,4 +217,57 @@ namespace CyberBlight.engine
             }
         }
     }
+
+    public class effects {
+
+
+        // Adds a glitch animation with 1s and 0s
+        // Alternating between background and text color
+        public static void glitch(int loopAmt, System.ConsoleColor color1, System.ConsoleColor color2)
+        {
+            System.ConsoleColor bgColor = Console.BackgroundColor;
+            System.ConsoleColor txtColor = Console.ForegroundColor;
+            Random rand = new Random();
+            for (int i = 0; i < loopAmt; i++)
+            {
+
+                 if (i % 2 == 0)
+                {
+                    Console.BackgroundColor = color1;
+                    Console.ForegroundColor = color2;
+                } else 
+                {
+                    Console.BackgroundColor = color2;
+                    Console.ForegroundColor = color1;
+                }
+
+                for (int j = 1; j <= 7; j++)
+                {
+                    for (int s = 1; s <= 8; s++)
+                    {
+                        int randomColor = rand.Next(10);
+                        int n = rand.Next(2);
+                        Console.Write(n);
+                    }
+                    if (j != rand.Next(10) )
+                    {
+                        Console.Write(" ");
+                    }
+                }
+            }
+            
+            Console.ForegroundColor = txtColor;
+            Console.BackgroundColor = bgColor;
+            Console.Write(" ");
+            Console.Clear();
+        }
+
+    }
+
+
+
+
+
+
+
 }
