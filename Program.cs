@@ -16,11 +16,12 @@ namespace Program.Main
         public static void Main()
         {
             engine.clear_console();
+            //Console.ForegroundColor = ConsoleColor.Green;
             engine.slow_type("\n\n-Welcome to the world of Cyber Blight-", 75, false);
             Thread.Sleep(1000);
             Console.WriteLine();
             Console.WriteLine();
-            string profile = engine.drop_down("Select your file",DataIO.existing_files(@"save_data\saves"));
+            string profile = engine.carrot_menu("Select your file",DataIO.existing_files(@"save_data\saves"));
             if (profile == "New Game")
             {
                 NewGame();
@@ -36,7 +37,7 @@ namespace Program.Main
 
         public static void NewGame()
         {
-            Console.WriteLine("    Enter your name:\n    >>");
+            Console.Write("    Enter your name:\n    >>");
             var player_name = Console.ReadLine();
             if (player_name!=null)
             {
