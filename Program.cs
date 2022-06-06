@@ -32,7 +32,11 @@ namespace Program.Main
                 //function should initialize the game with that data
                 ContinueGame();
             }
-            GameLoop();
+            while (true)
+            {
+                GameLoop();
+            }
+            
         }
 
         public static void NewGame()
@@ -59,12 +63,11 @@ namespace Program.Main
             engine.clear_console();
         }
 
-        public static void GameLoop()
-        {
+        public static async void GameLoop()
+        {   
+           await WebAPIClient.http.ProcessRepositories();
             StateMachine.focus_switch();
             StateMachine.aux_state();
-            engine.clear_console();
-            GameLoop();
         }
     }
 }
