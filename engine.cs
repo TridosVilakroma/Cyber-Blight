@@ -6,6 +6,7 @@ namespace CyberBlight.engine
     using System.Linq;
     using System;
     using System.Threading;
+    using character_sheet;
 
     public class Logic 
     {
@@ -192,6 +193,7 @@ namespace CyberBlight.engine
                     }
                 }
                 Console.WriteLine("\nThat is not on the list.\nVerify your selection.");
+                Console.ReadLine();
                 typo += 1;
             }
         }
@@ -300,7 +302,91 @@ namespace CyberBlight.engine
             }
 
         }
+
+    public static string drop_down_terminal(string prompt,Dictionary<string,string> items, string input_prompt = ">")
+        {
+
+            /* makes a drop down menu from a dict of choices
+
+             returns: a value from the dict passed into it,
+             there is no way to exit this menu loop without a valid selection.
+
+             if you want to add an exit clause, than make an exit value 
+             in your dict to be returned and then handle that return value
+             from your calling code.
+
+             example:
+
+             selection=drop_down(prompt,items={},input_prompt='>')
+             if selection == exit_value:
+                 break
+
+             input_prompt defaults to a single '>'
+             it is recommended to modify this to show how many menus
+             deep a player is.
+
+             if the input is not recognized too many times the menu 
+             prompt will be re-printed to prevent the player from having to
+             scroll up to read the available options.
+
+             input will be valid if a key from the dict is typed out in upper
+             or lowercase, or if the index of the menu item is input
+            */
+
+            void draw()
+            {
+                Console.WriteLine();
+                foreach (var (item, index) in items.Keys.ToArray().Select((item, index) => ( item, index )))
+                {
+                    Console.WriteLine($"[{index+1}] {item}");
+                }
+            }
+            draw();
+            int typo = 0;
+            while (true)
+            {
+                if (typo == 4)
+                {
+                    typo = 0;
+                    draw();
+                }
+
+                Console.WriteLine($@"$~/user/{Player.name}/{prompt}".ToLower());
+                Console.Write(input_prompt);
+                var input = Console.ReadLine();
+                try
+                {
+                    int selection = Convert.ToInt32(input) - 1;
+                    foreach (var (item, index) in items.Keys.ToArray().Select((item, index) => ( item, index )))
+                    {
+                        if (index == selection)
+                        {
+                            return items[item];
+                        }
+                    }
+                }
+                catch (FormatException)
+                {
+                    if(input!=null)
+                    {
+                        string selection = char.ToUpper(input[0]) + input.Substring(1);
+                        if (items.ContainsKey(selection))
+                        {
+                            return items[selection];
+                        }
+
+                    }
+                }
+                Console.WriteLine("\nThat is not on the list.\nVerify your selection.");
+                Console.ReadLine();
+                typo += 1;
+            }
+        }
+
+
     }
+
+    
 
     public class effects {
 

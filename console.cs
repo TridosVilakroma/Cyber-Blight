@@ -29,19 +29,19 @@ namespace CyberBlight.console
         
         public static void terminal()
         {
-            string action = engine.drop_down("Terminal", new Dictionary<string, string>
+            string action = engine.drop_down_terminal("Terminal", new Dictionary<string, string>
             {
                 {
-                    "Terminal",
+                    "Search",
                     "console_terminal"},
                 {
-                    "Network",
+                    "DDOS",
                     "console_network"},
                 {
-                    "Email",
+                    "Ping",
                     "console_email"},
                 {
-                    "Settings",
+                    "IP Flush",
                     "console_settings"}});
             Logic.focus = action;
         }
