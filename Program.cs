@@ -63,6 +63,8 @@ namespace Program.Main
         {
             StateMachine.focus_switch();
             StateMachine.aux_state();
+            engine.clear_console();
+            GameLoop();
         }
     }
 }
