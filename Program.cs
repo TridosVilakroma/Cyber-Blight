@@ -63,9 +63,8 @@ namespace Program.Main
             engine.clear_console();
         }
 
-        public static async void GameLoop()
+        public static void GameLoop()
         {   
-           await WebAPIClient.http.ProcessRepositories();
             StateMachine.focus_switch();
             StateMachine.aux_state();
         }
