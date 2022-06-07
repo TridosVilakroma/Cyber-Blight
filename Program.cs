@@ -45,9 +45,9 @@ namespace Program.Main
             var player_name = Console.ReadLine();
             if (player_name!=null)
             {
-            Player.name=player_name;
+                Player.name=player_name;
+                DataIO.save(Player.name, player_name);
             }
-            //DataIO.save(player, player_name);
             engine.clear_console();
             Text.prologue();
             Thread.Sleep(2000);
