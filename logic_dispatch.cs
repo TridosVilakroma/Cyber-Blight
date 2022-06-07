@@ -11,21 +11,17 @@ namespace CyberBlight.logic_dispatch
         public static void focus_switch()
         {
             if (Logic.focus == "console_main_menu")
-            {
-                Terminal.main_menu();
-            } else if (Logic.focus == "console_terminal")
-            {
-                Terminal.terminal();
-            } else if (Logic.focus == "console_network")
-            {
-                Terminal.network();
-            } else if (Logic.focus == "console_email")
-            {
-                Terminal.email();
-            } else if (Logic.focus == "console_settings")
-            {
-                Terminal.settings();
-            }
+            {Terminal.main_menu();}
+            else if (Logic.focus == "console_terminal")
+            {Terminal.terminal();}
+            else if (Logic.focus == "console_network")
+            {Terminal.network();}
+            else if (Logic.focus == "console_email")
+            {Terminal.email();}
+            else if (Logic.focus == "console_settings")
+            {Terminal.settings();}
+            else if (Logic.focus == "console_profile")
+            {Terminal.profile();}
         }
         
         public static void aux_state()
