@@ -12,7 +12,9 @@ namespace CyberBlight.data_IO
         {
             BinaryFormatter bf = new BinaryFormatter();
             FileStream file = File.Create (@$"save_data\saves\{slot}");
+            #pragma warning disable SYSLIB0011
             bf.Serialize(file, data);//dont deserialize data you dont trust;
+            #pragma warning restore SYSLIB0001
             file.Close();
         }
 
@@ -23,7 +25,9 @@ namespace CyberBlight.data_IO
             {
                 BinaryFormatter bf = new BinaryFormatter();
                 FileStream file = File.Open(@$"save_data\saves\{slot}", FileMode.Open);
+                #pragma warning disable SYSLIB0011
                 data = (object)bf.Deserialize(file);//dont deserialize data you dont trust;
+                #pragma warning restore SYSLIB0001
                 file.Close();
                 return data;
             }
