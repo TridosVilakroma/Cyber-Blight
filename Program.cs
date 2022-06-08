@@ -41,8 +41,7 @@ namespace Program.Main
 
         public static void NewGame()
         {
-            Console.Write("    Enter your name:\n    >>");
-            var player_name = Console.ReadLine();
+            var player_name = engine.getInput("Enter your name");
             if (player_name!=null)
             {
                 Player.name=player_name;
