@@ -7,12 +7,12 @@ namespace CyberBlight.engine
     using System.Threading;
     using character_sheet;
 
-    public class Logic 
+    public class Logic
     {
-            public static string focus = "console_main_menu";
+        public static string focus = "console_main_menu";
     }
-    
-    
+
+
     public class engine
     {
         // these functions should be used throughout the project to automate
@@ -301,8 +301,7 @@ namespace CyberBlight.engine
             }
 
         }
-
-    public static string drop_down_terminal(string prompt,Dictionary<string,string> items, string input_prompt = ">")
+        public static string drop_down_terminal(string prompt,Dictionary<string,string> items, string input_prompt = ">")
         {
 
             /* makes a drop down menu from a dict of choices
@@ -381,11 +380,18 @@ namespace CyberBlight.engine
                 typo += 1;
             }
         }
-
-
+        public static string getInput(string prompt,string input_prompt = ">>")
+        {
+            Console.Write("    "+prompt+":\n    "+input_prompt);
+            var input = Console.ReadLine();
+            if (input!=null)
+            {
+                return input;
+            }
+            return "";
+        }
     }
 
-    
 
     public class effects {
 
