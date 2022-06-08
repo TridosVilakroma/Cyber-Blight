@@ -89,7 +89,15 @@ namespace CyberBlight.console
                     "console_save"}},">>");
             if (action == "console_save")
             {
-                DataIO.save(Player.name, Player.name);
+                if (Player.loadPath=="nada")
+                {
+                    DataIO.save(Player.name, Player.name);
+                }
+                else
+                {
+                    DataIO.save(Player.name, Player.loadPath);
+                }
+                
                 action="console_settings";
             }
             Logic.focus=action;
@@ -105,7 +113,12 @@ namespace CyberBlight.console
                 {
                     "Close",
                     "console_settings"}
-                });
+                }, ">>>");
+            if (action == "console_user_name")
+            {
+                Player.name=engine.getInput("Enter new user name",">>>>");
+                action = "console_profile";
+            }
             Logic.focus=action;
         }
     }
