@@ -382,6 +382,16 @@ namespace CyberBlight.engine
         }
         public static string getInput(string prompt,string input_prompt = ">>")
         {
+            /* getInput acts like a secondary menu to supplement a primary
+                menu. It will return any string the player enters.
+
+                Useful when asking a player to name something.
+                Because anything can be input, this is not suitable for
+                controlling much more than that.
+
+                Be aware that if the player hits enter without pressing any
+                other keys, an empty string will be returned, not null
+            */
             Console.Write("    "+prompt+":\n    "+input_prompt);
             var input = Console.ReadLine();
             if (input!=null)
@@ -392,9 +402,17 @@ namespace CyberBlight.engine
         }
         public static void flushKeyboard()
         {
-            while (Console.In.Peek() != -1)
+            /* keyboard inputs are added to a buffer, and then handled sequentially.
+                Even during blocking code the buffer will fill up, and the inputs
+                will be passed to the next available method (usually asking for player input)
+                causing unwanted behavior.
+
+                This function allows the buffer to be emptied.
+                Use this before most methods requesting input.
+            */
+            while (Console.KeyAvailable == true)
             {
-                Console.In.Read();
+                Console.ReadKey(true);
             }
         }
     }
