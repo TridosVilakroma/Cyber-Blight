@@ -21,6 +21,7 @@ namespace Program.Main
             Thread.Sleep(1000);
             Console.WriteLine();
             Console.WriteLine();
+            engine.flushKeyboard();
             string profile = engine.carrot_menu("Select your file",DataIO.existing_files(@"save_data\saves"));
             if (profile == "New Game")
             {
@@ -28,9 +29,7 @@ namespace Program.Main
             }
             else
             {
-                //var save_data = DataIO.load(profile); this should return the data, then a seperate
-                //function should initialize the game with that data
-                ContinueGame();
+                ContinueGame(profile);
             }
             while (true)
             {
@@ -54,16 +53,20 @@ namespace Program.Main
             engine.slow_type("You sit down at your console");
             Thread.Sleep(2000);
             engine.jump(2);
+            engine.flushKeyboard();
         }
 
-        public static void ContinueGame()
+        public static void ContinueGame(string profile)
         {
-            //load game func needed here
+            Player.name=profile;
+            object data = DataIO.load(Player.name);
+            Player.loadPath=Player.name;
+            //load game func using data needed here
             engine.clear_console();
         }
 
         public static void GameLoop()
-        {   
+        {
             StateMachine.focus_switch();
             StateMachine.aux_state();
         }
