@@ -390,6 +390,13 @@ namespace CyberBlight.engine
             }
             return "";
         }
+        public static void flushKeyboard()
+        {
+            while (Console.In.Peek() != -1)
+            {
+                Console.In.Read();
+            }
+        }
     }
 
 
