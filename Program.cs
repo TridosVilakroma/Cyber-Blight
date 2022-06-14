@@ -10,20 +10,22 @@ namespace Program.Main
     using CyberBlight.character_sheet;
     // using inventory;
     using CyberBlight.logic_dispatch;
+    using CyberBlight.input_device;
 
     public static class GameStruct
     {
         public static void Main()
         {
             engine.clear_console();
+            // Console.WriteLine("hello world, this is a test!");
+            // while(true){ConsoleMouse.listen();}
             Console.Title ="Cyber blight";
             effects.glitch(150, ConsoleColor.Black, ConsoleColor.DarkGreen);
             engine.slow_type("\n\n-Welcome to the world of Cyber Blight-", 75, false);
             Thread.Sleep(1000);
-            Console.WriteLine();
-            Console.WriteLine();
+            engine.jump(1);
             engine.flushKeyboard();
-            string profile = engine.carrot_menu("Select your file",DataIO.existing_files(@"save_data\saves"));
+            string profile = engine.mouse_menu("Select your file",DataIO.existing_files(@"save_data\saves"));
             if (profile == "New Game")
             {
                 NewGame();
