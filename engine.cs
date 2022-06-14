@@ -306,8 +306,6 @@ namespace CyberBlight.engine
         {
             jump();
             Console.CursorVisible = false;
-            int fps = 60;
-            Console.WriteLine(prompt + ":");
             draw();
             int cursorResetLeft  = Console.CursorLeft;
             int cursorResetTop  = Console.CursorTop;
@@ -322,19 +320,8 @@ namespace CyberBlight.engine
                     Console.WriteLine($"[{index+1}] {item}");
                 }
             }
-            void deltaTime()
-            {
-                time2 = DateTime.Now;
-                float deltaTime = (time2.Ticks - time1.Ticks)/10000;//Ticks are 1/10,000 of a millisecond
-                if (deltaTime<fps && deltaTime>0)
-                {
-                    Thread.Sleep((Convert.ToInt32(fps-deltaTime)));
-                }
-                time1 = time2;
-            }
             while(true)
             {
-                deltaTime();
                 string selection = ConsoleMouse.getOption();
                 if (selection!="nada")
                 {
@@ -343,7 +330,7 @@ namespace CyberBlight.engine
                         if (item.Contains(selection))
                         {
                             Console.CursorVisible = true;
-                            return item;
+                            return items[item];
                         }
                     }
                 }
