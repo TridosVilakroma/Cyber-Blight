@@ -6,6 +6,7 @@ namespace CyberBlight.engine
     using System;
     using System.Threading;
     using character_sheet;
+    using CyberBlight.input_device;
 
     public class Logic
     {
@@ -297,6 +298,54 @@ namespace CyberBlight.engine
                 {
                     Console.CursorVisible = true;
                     return selection;
+                }
+            }
+
+        }
+        public static string mouse_menu(string prompt,Dictionary<string,string> items, string input_prompt = ">")
+        {
+            jump();
+            Console.CursorVisible = false;
+            int fps = 60;
+            Console.WriteLine(prompt + ":");
+            draw();
+            int cursorResetLeft  = Console.CursorLeft;
+            int cursorResetTop  = Console.CursorTop;
+            DateTime time1 = DateTime.Now;
+            DateTime time2 = DateTime.Now;
+            void draw()
+            {
+                Console.WriteLine();
+                Console.WriteLine(prompt + ":");
+                foreach (var (item, index) in items.Keys.ToArray().Select((item, index) => ( item, index )))
+                {
+                    Console.WriteLine($"[{index+1}] {item}");
+                }
+            }
+            void deltaTime()
+            {
+                time2 = DateTime.Now;
+                float deltaTime = (time2.Ticks - time1.Ticks)/10000;//Ticks are 1/10,000 of a millisecond
+                if (deltaTime<fps && deltaTime>0)
+                {
+                    Thread.Sleep((Convert.ToInt32(fps-deltaTime)));
+                }
+                time1 = time2;
+            }
+            while(true)
+            {
+                deltaTime();
+                string selection = ConsoleMouse.getOption();
+                if (selection!="nada")
+                {
+                    foreach(var item in items.Keys)
+                    {
+                        if (item.Contains(selection))
+                        {
+                            Console.CursorVisible = true;
+                            return item;
+                        }
+                    }
                 }
             }
 
