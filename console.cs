@@ -50,6 +50,7 @@ namespace CyberBlight.console
         
         public static void network()
         {
+            Logic.focus="console_main_menu";
         }
         
         public static void email()
@@ -68,6 +69,7 @@ namespace CyberBlight.console
         
         public static void inbox()
         {
+            Logic.focus="console_main_menu";
         }
         
         public static void settings()
@@ -86,7 +88,10 @@ namespace CyberBlight.console
                     "console_color"},
                 {
                     "Save Game",
-                    "console_save"}},">>");
+                    "console_save"},
+                {
+                    "Close",
+                    "console_main_menu"}},">>");
             if (action == "console_save")
             {
                 if (Player.loadPath=="nada")
