@@ -12,7 +12,7 @@ namespace CyberBlight.console
         public Terminal(){}
         public static void main_menu()
         {
-            string action = engine.drop_down("Console", new Dictionary<string, string>
+            string action = engine.mouse_menu("Console", new Dictionary<string, string>
             {
                 {
                     "Terminal",
@@ -73,7 +73,7 @@ namespace CyberBlight.console
         public static void settings()
         {
             engine.clear_console();
-            string action = engine.drop_down("Settings", new Dictionary<string, string>
+            string action = engine.mouse_menu("Settings", new Dictionary<string, string>
             {
                 {
                     "Profile",
@@ -105,7 +105,7 @@ namespace CyberBlight.console
         public static void profile()
         {
             engine.clear_console();
-            string action = engine.drop_down("Console", new Dictionary<string, string>
+            string action = engine.mouse_menu("Console", new Dictionary<string, string>
             {
                 {
                     "User Name",
