@@ -100,7 +100,7 @@ namespace CyberBlight.console
                 }
                 else
                 {
-                    DataIO.save(Player.name, Player.loadPath);
+                    DataIO.save(Player.name, Player.name,true);
                 }
                 
                 action="console_settings";
