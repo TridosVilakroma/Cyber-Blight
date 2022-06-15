@@ -3,14 +3,20 @@ namespace CyberBlight.data_IO
     using System.IO;
     using System.Collections.Generic;
     using System.Runtime.Serialization.Formatters.Binary;
+    using character_sheet;
 
 
     public static class DataIO
     {
 
-        public static void save(object data, object slot)
+        public static void save(object data, string slot, bool overwrite=false)
         {
             BinaryFormatter bf = new BinaryFormatter();
+            if (overwrite)
+            {
+                File.Move(@$"save_data\saves\{Player.loadPath}",@$"save_data\saves\{slot}");
+                Player.loadPath=slot;
+            }
             using (FileStream file = File.Create (@$"save_data\saves\{slot}"))
             {
                 #pragma warning disable SYSLIB0011
