@@ -47,12 +47,32 @@ namespace CyberBlight.console
         }
         public static void network()
         {
-            Logic.focus="console_main_menu";
+            engine.clear_console();
+            string action = engine.hack_menu("Machine/local_network/router/public_network", new Dictionary<string, string>
+            {
+                {
+                    "Attributes",
+                    "console_attributes"},
+                {
+                    "Hardware",
+                    "console_hardware"},
+                {
+                    "Inventory",
+                    "console_inventory"},
+                {
+                    "Settings",
+                    "console_settings"},
+                {
+                    "Close",
+                    "console_main_menu"}
+                }, ">>>",
+                "Access other machines on the network by typing their ip addresses");
+            Logic.focus=action;
         }
         public static void email()
         {
             engine.clear_console();
-            string action = engine.drop_down("E-mail", new Dictionary<string, string>
+            string action = engine.mouse_menu("E-mail", new Dictionary<string, string>
             {
                 {
                     "Inbox",
@@ -71,6 +91,15 @@ namespace CyberBlight.console
             engine.clear_console();
             string action = engine.mouse_menu("Profile", new Dictionary<string, string>
             {
+                {
+                    "Attributes",
+                    "console_attributes"},
+                {
+                    "Hardware",
+                    "console_hardware"},
+                {
+                    "Inventory",
+                    "console_inventory"},
                 {
                     "Settings",
                     "console_settings"},
