@@ -22,6 +22,7 @@ namespace CyberBlight.logic_dispatch
             {engine.clear_console();Terminal.settings();}
             else if (Logic.focus == "console_profile")
             {engine.clear_console();Terminal.profile();}
+            else{Logic.focus = "console_main_menu";}
         }
         
         public static void aux_state()
