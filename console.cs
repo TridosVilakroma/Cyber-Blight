@@ -8,7 +8,6 @@ namespace CyberBlight.console
 
     public class Terminal
     {
-
         public Terminal(){}
         public static void main_menu()
         {
@@ -24,11 +23,10 @@ namespace CyberBlight.console
                     "Email",
                     "console_email"},
                 {
-                    "Settings",
-                    "console_settings"}});
+                    "Profile",
+                    "console_profile"}});
             Logic.focus=action;
         }
-        
         public static void terminal()
         {
             string action = engine.drop_down_terminal("Terminal", new Dictionary<string, string>
@@ -47,12 +45,10 @@ namespace CyberBlight.console
                     "console_settings"}});
             Logic.focus = action;
         }
-        
         public static void network()
         {
             Logic.focus="console_main_menu";
         }
-        
         public static void email()
         {
             engine.clear_console();
@@ -66,20 +62,32 @@ namespace CyberBlight.console
                     "console_main_menu"}}, ">>");
             Logic.focus = action;
         }
-        
         public static void inbox()
         {
             Logic.focus="console_main_menu";
         }
-        
+        public static void profile()
+        {
+            engine.clear_console();
+            string action = engine.mouse_menu("Profile", new Dictionary<string, string>
+            {
+                {
+                    "Settings",
+                    "console_settings"},
+                {
+                    "Close",
+                    "console_main_menu"}
+                }, ">>>");
+            Logic.focus=action;
+        }
         public static void settings()
         {
             engine.clear_console();
             string action = engine.mouse_menu("Settings", new Dictionary<string, string>
             {
                 {
-                    "Profile",
-                    "console_profile"},
+                    "User Name",
+                    "console_user_name"},
                 {
                     "Text Speed",
                     "console_text_speed"},
@@ -91,7 +99,7 @@ namespace CyberBlight.console
                     "console_save"},
                 {
                     "Close",
-                    "console_main_menu"}},">>");
+                    "console_profile"}},">>");
             if (action == "console_save")
             {
                 if (Player.loadPath=="nada")
@@ -105,24 +113,10 @@ namespace CyberBlight.console
                 
                 action="console_settings";
             }
-            Logic.focus=action;
-        }
-        public static void profile()
-        {
-            engine.clear_console();
-            string action = engine.mouse_menu("Console", new Dictionary<string, string>
-            {
-                {
-                    "User Name",
-                    "console_user_name"},
-                {
-                    "Close",
-                    "console_settings"}
-                }, ">>>");
             if (action == "console_user_name")
             {
                 Player.name=engine.getInput("Enter new user name",">>>>");
-                action = "console_profile";
+                action = "console_settings";
             }
             Logic.focus=action;
         }
