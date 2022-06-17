@@ -451,6 +451,99 @@ namespace CyberBlight.engine
                 Console.ReadKey(true);
             }
         }
+         public static string hack_menu(string prompt,Dictionary<string,string> items, string input_prompt = ">",string helperText="nada")
+        {
+
+            /* prompts player to type commands.
+
+             the helper text will be written to screen to give the player 
+             an idea of what they should try typing;
+             this is important as the dict will not be printed for them to read.
+
+             returns: a value from the dict passed into it,
+             there is no way to exit this menu loop without a valid selection.
+
+             if you want to add an exit clause, than make an exit value 
+             in your dict to be returned and then handle that return value
+             from your calling code.
+
+             example:
+
+             selection=hack_menu(prompt,items={},input_prompt='>',helperText="nada")
+             if selection == exit_value:
+                 break
+
+             input_prompt defaults to nothing.
+             it is used to keep menus hot swappable.
+             not in use for this menu.
+
+             prompt:
+             you should pass in the "directory path" the player is in.
+
+             if the input is not recognized the prompt will be rewritten,
+             however after too many times the console will be cleared 
+             and the menu prompt will be re-printed to prevent the player from having to
+             scroll up to read the available options.
+
+             input will be valid if a key from the dict is typed out in upper
+             or lowercase, or if the index of the menu item is input
+            */
+
+            void draw()
+            {
+                clear_console();
+                if (helperText!="nada")
+                {
+                Console.WriteLine($"[{helperText}]");
+                }
+                Console.WriteLine();
+                Console.Write(prompt + "/");
+            }
+            draw();
+            int typo = 0;
+            while (true)
+            {
+                if (typo == 4)
+                {
+                    typo = 0;
+                    draw();
+                }
+                var input = Console.ReadLine();
+                try
+                {
+                    int selection = Convert.ToInt32(input) - 1;
+                    foreach (var (item, index) in items.Keys.ToArray().Select((item, index) => ( item, index )))
+                    {
+                        if (index == selection)
+                        {
+                            return items[item];
+                        }
+                    }
+                }
+                catch(Exception e)
+                {
+                    if (e is FormatException)
+                    {
+                        if(input!=null)
+                        {
+                            string selection = char.ToUpper(input[0]) + input.Substring(1);
+                            if (items.ContainsKey(selection))
+                            {
+                                return items[selection];
+                            }
+                        }
+                    }
+                    if (e is not IndexOutOfRangeException)
+                    {
+                        throw;
+                    }
+                    
+                }
+                Console.WriteLine("\nCommand not recognized.\nType Close to exit.\n");
+                Console.Write(prompt + "/");
+                typo += 1;
+            }
+        }
     }
 
 
