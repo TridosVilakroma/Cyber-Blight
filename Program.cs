@@ -19,7 +19,7 @@ namespace Program.Main
             engine.clear_console();
             // Console.WriteLine("hello world, this is a test!");
             // while(true){ConsoleMouse.listen();}
-            Console.Title ="Cyber blight";
+            Console.Title ="Cyber Blight";
             effects.glitch(150, ConsoleColor.Black, ConsoleColor.DarkGreen);
             engine.slow_type("\n\n-Welcome to the world of Cyber Blight-", 75, false);
             Thread.Sleep(1000);
