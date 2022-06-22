@@ -497,7 +497,7 @@ namespace CyberBlight.engine
                 Console.WriteLine($"[{helperText}]");
                 }
                 Console.WriteLine();
-                Console.Write(prompt + "/");
+                Console.Write(prompt + input_prompt);
             }
             draw();
             int typo = 0;
@@ -524,7 +524,7 @@ namespace CyberBlight.engine
                 {
                     if (e is FormatException)
                     {
-                        if(input!=null)
+                        if(!String.IsNullOrEmpty(input))
                         {
                             string selection = char.ToUpper(input[0]) + input.Substring(1);
                             if (items.ContainsKey(selection))
@@ -533,7 +533,7 @@ namespace CyberBlight.engine
                             }
                         }
                     }
-                    if (e is not IndexOutOfRangeException)
+                    else if (e is not IndexOutOfRangeException)
                     {
                         throw;
                     }
