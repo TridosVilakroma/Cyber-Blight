@@ -48,7 +48,7 @@ namespace CyberBlight.console
         public static void network()
         {
             engine.clear_console();
-            string action = engine.hack_menu("Machine/local_network/router/public_network", new Dictionary<string, string>
+            string action = engine.hack_menu("router/public_network", new Dictionary<string, string>
             {
                 {
                     "Attributes",
@@ -65,8 +65,8 @@ namespace CyberBlight.console
                 {
                     "Close",
                     "console_main_menu"}
-                }, ">>>",
-                "Access other machines on the network by typing their ip addresses");
+                }, ">",
+                "Access other networked machines via ip address; Type Close to exit");
             Logic.focus=action;
         }
         public static void email()
