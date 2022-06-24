@@ -56,7 +56,7 @@ namespace CyberBlight.engine
                 Console.Write(_text);
             }
         }
-        public static void slow_type(string text, int typing_speed = 100, bool new_line = true)
+        public static void slow_type(string text, int typing_speed = 100, bool new_line = true, bool center = false)
         {
         // print function that feels like a human is typing.
         //
@@ -64,15 +64,18 @@ namespace CyberBlight.engine
         //
         //new_line is a boolean, it controls weather the console will begin 
         //the next print operation on the same line or a new line.
+        //bool center, if true will center output text in console window
+
             Random rng = new Random();
+            if (center)
+            {
+                Console.SetCursorPosition(Console.WindowWidth/2-text.Length/2, Console.CursorTop);
+            }
             foreach (var letter in text)
             {
             //this looks at each letter and prints it, then waits a random amount of time.
                 Console.Write(letter);
-                //sys.stdout.flush();
-                
                 Thread.Sleep(rng.Next(0, typing_speed));
-
             }
             if (new_line)
             {
@@ -112,10 +115,10 @@ namespace CyberBlight.engine
             void draw()
             {
                 Console.WriteLine();
-                Console.WriteLine(prompt + ":");
+                center_text(prompt + ":");
                 foreach (var (item, index) in items.Keys.ToArray().Select((item, index) => ( item, index )))
                 {
-                    Console.WriteLine($"[{index+1}] {item}");
+                    center_text($"[{index+1}] {item}");
                 }
             }
             draw();
@@ -151,7 +154,7 @@ namespace CyberBlight.engine
                         }
                     }
                 }
-                Console.WriteLine("\nThat is not on the list.\nVerify your selection.");
+                center_text("\nThat is not on the list.\nVerify your selection.");
                 typo += 1;
             }
         }
@@ -188,10 +191,10 @@ namespace CyberBlight.engine
             void draw()
             {
                 Console.WriteLine();
-                Console.WriteLine(prompt + ":");
+                center_text(prompt + ":");
                 foreach (var (item, index) in items.Keys.ToArray().Select((item, index) => ( item, index )))
                 {
-                    Console.WriteLine($"[{index+1}] {item}");
+                    center_text($"[{index+1}] {item}");
                 }
             }
             draw();
@@ -227,7 +230,7 @@ namespace CyberBlight.engine
                         }
                     }
                 }
-                Console.WriteLine("\nThat is not on the list.\nVerify your selection.");
+                center_text("\nThat is not on the list.\nVerify your selection.");
                 Console.ReadLine();
                 typo += 1;
             }
@@ -256,7 +259,7 @@ namespace CyberBlight.engine
             Console.CursorVisible = false;
             int carrot = 0;
             int fps = 60;
-            Console.WriteLine(prompt + ":");
+            center_text(prompt + ":");
             int cursorResetLeft  = Console.CursorLeft;
             int cursorResetTop  = Console.CursorTop;
             void draw()
@@ -271,11 +274,11 @@ namespace CyberBlight.engine
                     Console.SetCursorPosition(cursorResetLeft,Console.CursorTop);
                     if (carrot==index)
                     {
-                        Console.WriteLine($">[{index+1}] {item}");
+                        center_text($">[{index+1}] {item}");
                     }
                     else
                     {
-                    Console.WriteLine($"[{index+1}] {item}");
+                    center_text($"[{index+1}] {item}");
                     }
                 }
             }
@@ -408,7 +411,7 @@ namespace CyberBlight.engine
                 Console.WriteLine();
                 foreach (var (item, index) in items.Keys.ToArray().Select((item, index) => ( item, index )))
                 {
-                    Console.WriteLine($"[{index+1}] {item}");
+                    center_text($"[{index+1}] {item}");
                 }
             }
             draw();
@@ -421,7 +424,7 @@ namespace CyberBlight.engine
                     draw();
                 }
 
-                Console.WriteLine($@"$~/user/{Player.name}/{prompt}".ToLower());
+                center_text($@"$~/user/{Player.name}/{prompt}".ToLower());
                 Console.Write(input_prompt);
                 var input = Console.ReadLine();
                 try
@@ -447,7 +450,7 @@ namespace CyberBlight.engine
 
                     }
                 }
-                Console.WriteLine("\nThat is not on the list.\nVerify your selection.");
+                center_text("\nThat is not on the list.\nVerify your selection.");
                 Console.ReadLine();
                 typo += 1;
             }
@@ -464,7 +467,7 @@ namespace CyberBlight.engine
                 Be aware that if the player hits enter without pressing any
                 other keys, an empty string will be returned, not null
             */
-            Console.Write("    "+prompt+":\n    "+input_prompt);
+            center_text("    "+prompt+":\n    "+input_prompt);
             var input = Console.ReadLine();
             if (input!=null)
             {
@@ -530,10 +533,10 @@ namespace CyberBlight.engine
                 clear_console();
                 if (helperText!="nada")
                 {
-                Console.WriteLine($"[{helperText}]");
+                center_text($"[{helperText}]");
                 }
                 Console.WriteLine();
-                Console.Write(prompt + input_prompt);
+                center_text(prompt + input_prompt,-1,false);
             }
             draw();
             int typo = 0;
@@ -575,8 +578,11 @@ namespace CyberBlight.engine
                     }
                     
                 }
-                Console.WriteLine("\nCommand not recognized.\nType Close to exit.\n");
-                Console.Write(prompt + "/");
+                
+                center_text("Command not recognized.");
+                center_text("Type Close to exit.");
+                jump();
+                center_text(prompt + "/",-1,false);
                 typo += 1;
             }
         }
