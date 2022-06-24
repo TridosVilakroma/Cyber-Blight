@@ -16,6 +16,8 @@ namespace Program.Main
     {
         public static void Main()
         {
+            Console.CancelKeyPress += delegate {engine.OnProcessExit();};
+            Console.CursorVisible = false;
             engine.clear_console();
             // Console.WriteLine("hello world, this is a test!");
             // while(true){ConsoleMouse.listen();}

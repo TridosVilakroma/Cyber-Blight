@@ -334,7 +334,7 @@ namespace CyberBlight.engine
                 string selection = getItem();
                 if (selection!="nada")
                 {
-                    Console.CursorVisible = true;
+                    //Console.CursorVisible = true;
                     return selection;
                 }
             }
@@ -368,7 +368,7 @@ namespace CyberBlight.engine
                     {
                         if (item.Contains(selection))
                         {
-                            Console.CursorVisible = true;
+                            //Console.CursorVisible = true;
                             return items[item];
                         }
                     }
@@ -467,6 +467,7 @@ namespace CyberBlight.engine
                 Be aware that if the player hits enter without pressing any
                 other keys, an empty string will be returned, not null
             */
+            Console.CursorVisible = true;
             if (center)
             {
                 int _center = align_left_x(prompt);
@@ -481,8 +482,10 @@ namespace CyberBlight.engine
             var input = Console.ReadLine();
             if (input!=null)
             {
+                Console.CursorVisible = false;
                 return input;
             }
+            Console.CursorVisible = false;
             return "";
         }
         public static void flushKeyboard()
@@ -537,7 +540,7 @@ namespace CyberBlight.engine
              input will be valid if a key from the dict is typed out in upper
              or lowercase, or if the index of the menu item is input
             */
-
+            Console.CursorVisible = true;
             void draw()
             {
                 clear_console();
@@ -565,6 +568,7 @@ namespace CyberBlight.engine
                     {
                         if (index == selection)
                         {
+                            Console.CursorVisible = false;
                             return items[item];
                         }
                     }
@@ -578,6 +582,7 @@ namespace CyberBlight.engine
                             string selection = char.ToUpper(input[0]) + input.Substring(1);
                             if (items.ContainsKey(selection))
                             {
+                                Console.CursorVisible = false;
                                 return items[selection];
                             }
                         }
@@ -595,6 +600,13 @@ namespace CyberBlight.engine
                 center_text(prompt + "/",-1,false);
                 typo += 1;
             }
+        }
+        public static void OnProcessExit ()
+        {
+            //this will run as game closes; used for cleanup.
+            clear_console();
+            center_text("Thanks for playing!\n\n\n");
+            Console.CursorVisible = true;
         }
     }
 
