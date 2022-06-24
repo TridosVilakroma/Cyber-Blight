@@ -455,7 +455,7 @@ namespace CyberBlight.engine
                 typo += 1;
             }
         }
-        public static string getInput(string prompt,string input_prompt = ">>")
+        public static string getInput(string prompt,string input_prompt = ">>",bool center = false)
         {
             /* getInput acts like a secondary menu to supplement a primary
                 menu. It will return any string the player enters.
@@ -467,7 +467,17 @@ namespace CyberBlight.engine
                 Be aware that if the player hits enter without pressing any
                 other keys, an empty string will be returned, not null
             */
-            center_text("    "+prompt+":\n    "+input_prompt);
+            if (center)
+            {
+                int _center = align_left_x(prompt);
+                center_text("    "+prompt+":\n",_center);
+                center_text("    "+input_prompt,_center,false);
+            }
+            else
+            {
+                center_text("    "+prompt+":\n");
+                center_text("    "+input_prompt,-1,false);
+            }
             var input = Console.ReadLine();
             if (input!=null)
             {

@@ -144,7 +144,7 @@ namespace CyberBlight.console
             }
             if (action == "console_user_name")
             {
-                Player.name=engine.getInput("Enter new user name",">>>>");
+                Player.name=engine.getInput("Enter new user name",">>>>",true);
                 action = "console_settings";
             }
             Logic.focus=action;
