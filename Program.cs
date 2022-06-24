@@ -21,7 +21,8 @@ namespace Program.Main
             // while(true){ConsoleMouse.listen();}
             Console.Title ="Cyber Blight";
             effects.glitch(150, ConsoleColor.Black, ConsoleColor.DarkGreen);
-            engine.slow_type("\n\n-Welcome to the world of Cyber Blight-", 75, false);
+            engine.jump();
+            engine.slow_type("-Welcome to the world of Cyber Blight-", 75, false,true);
             Thread.Sleep(1000);
             engine.jump(1);
             engine.flushKeyboard();
