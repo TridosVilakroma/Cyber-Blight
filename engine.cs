@@ -20,7 +20,42 @@ namespace CyberBlight.engine
         // repetetive or complex tasks.
         // this is the 'engine' of our game.
 
+        public static int align_left_x(string _text)
+        {
+            return Console.WindowWidth/2-_text.Length;
+        }
+        public static void center_text(string _text,int center=-1,bool newLine=true)
+        {
+            /* By default this will center the text that is passed to it.
 
+            If you are trying to align text with previous calls to center_text() then you
+            should pass in a center value.
+            (use align_left_x() on the first line you want to set as the base "left",
+            then use the return value as the "center" argument passed to center_text()
+            for all strings, including the first)
+
+            newLine is a bool, fairly obvious.
+            true will use Console.WriteLine()
+            false will use Console.Write()
+            */
+
+            if (center==-1)
+            {
+                Console.SetCursorPosition(Console.WindowWidth/2-_text.Length/2, Console.CursorTop);
+            }
+            else
+            {
+                Console.SetCursorPosition(center, Console.CursorTop);
+            }
+            if (newLine)
+            {
+                Console.WriteLine(_text);
+            }
+            else
+            {
+                Console.Write(_text);
+            }
+        }
         public static void slow_type(string text, int typing_speed = 100, bool new_line = true)
         {
         // print function that feels like a human is typing.
@@ -314,10 +349,11 @@ namespace CyberBlight.engine
             void draw()
             {
                 Console.WriteLine();
-                Console.WriteLine(prompt + ":");
+                int _center = align_left_x(prompt + ":");
+                center_text(prompt + ":",_center);
                 foreach (var (item, index) in items.Keys.ToArray().Select((item, index) => ( item, index )))
                 {
-                    Console.WriteLine($"[{index+1}] {item}");
+                    center_text($"[{index+1}] {item}",_center);
                 }
             }
             while(true)
